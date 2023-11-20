@@ -4,6 +4,7 @@
 # But not directories, as we need to search them for flake.nix files
 !*/
 
+/*/*
 # Do not ignore flake.nix files in any direct subdirectory
 !/*/flake.nix
 

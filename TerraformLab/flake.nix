@@ -11,40 +11,31 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        nerdtree = pkgs.fetchFromGitHub {
-          owner = "preservim";
-          repo = "nerdtree";
-          rev = "7.0.0";  
-          sha256 = "sha256-ozrxaHNG5j0+Zn68AOiGfarwooFw1czUf8POcDxeaZA=";
+        vimTerraform = pkgs.fetchFromGitHub {
+          owner = "hashivim";
+          repo = "vim-terraform";
+          rev = "master";
+          sha256 = "sha256-UGpgRqvmxsAbGF0yAKWaW0wbdxwzETlns6Y1peTRYBg=";
         };
         # Fetch the Lua configuration file directly from GitHub
         terraformNvimConfig = pkgs.fetchFromGitHub {
           owner = "mononosis";
           repo = "neovim-terraform-lab";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-VhLTlwKKg0BiQ3nP0ZTecuZG959mxHANQCSyU4+m9kE="; # Replace with the correct hash
+          sha256 = "sha256-torZ+Jt/8Mm7neloZjYA4JZ6n0315jv7P5E+wcGswBY="; # Replace with the correct hash
         };
       in
       {
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.terraform
+            pkgs.terraform-ls
+            pkgs.tflint
             pkgs.google-cloud-sdk
-            #(nixpkgs.legacyPackages.x86_64-linux.neovim.override {
-            #  # Use the custom configuration for Terraform
-            #  configure = {
-            #    customRC = builtins.readFile (terraformNvimConfig + "/terraform-nvim-config.lua");
-            #  };
-            #})
           ];
           shellHook = ''
-            export PROJECT_NVIM_CONFIG=${terraformNvimConfig}/terraform-nvim-config.lua
-          '';
-          postShellHook = ''
-            if [ -n "$IN_NIX_SHELL" ]; then
-              echo fklsdjlfjsdlkfjsdlkjflsjldfjlskdjflksjflksdjlkfjsdlkfjlskdjflksdjflksjdlkfjsldkfjlsdjf
-              ln -s ${nerdtree} /home/nixos/jfkldsjlkfjs/nerdtree
-            fi
+            export NVIM_PLUGIN_PATHS="${vimTerraform}"
+            # export PROJECT_NVIM_CONFIG=${terraformNvimConfig}/terraform-nvim-config.lua
           '';
         };
       });
