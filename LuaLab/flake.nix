@@ -10,6 +10,18 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        seoulVimColor = pkgs.fetchFromGitHub {
+          owner = "junegunn";
+          repo = "seoul256.vim";
+          rev = "master";
+          sha256 = "sha256-PHplqWYT9sxU/Z/U+bRfCqiCOITjTp1T3xytZBBgQy4=";
+        };
+        materialVimColor = pkgs.fetchFromGitHub {
+          owner = "jdkanani";
+          repo = "vim-material-theme";
+          rev = "master";
+          sha256 = "sha256-2y4G2mqMrArg+bMI3xJsv6SzELSuO64JlzjjHIX/uz8=";
+        };
         plenaryPlugin = pkgs.fetchFromGitHub {
           owner = "nvim-lua";
           repo = "plenary.nvim";
@@ -25,9 +37,9 @@
         # Fetch the Lua configuration file directly from GitHub
         luaNeovimLab = pkgs.fetchFromGitHub {
           owner = "mononosis";
-          repo = "lua-neovim-lab";
+          repo = "nvim-lua-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-wAcgJHrNbLwwrwsTS2A0+PtlyVwswJarEtrQQBaaNs0="; # Replace with the correct hash
+          sha256 = "sha256-E3EHFIRN5zBMDbqCB+sY5qyA6Xw0RYsYGVBJjtF6CtA="; # Replace with the correct hash
         };
       in
       {
@@ -36,7 +48,7 @@
             pkgs.lua-language-server
           ];
           shellHook = ''
-            export NVIM_PLUGIN_PATHS="${plenaryPlugin}:${neovdevPlugin}"
+            export NVIM_PLUGIN_PATHS="${materialVimColor}:${plenaryPlugin}:${neovdevPlugin}:${seoulVimColor}"
             export PROJECT_NVIM_CONFIG=${luaNeovimLab}
           '';
         };

@@ -20,9 +20,9 @@
         # Fetch the Lua configuration file directly from GitHub
         terraformNvimConfig = pkgs.fetchFromGitHub {
           owner = "mononosis";
-          repo = "neovim-terraform-lab";
+          repo = "nvim-terraform-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-CkDwInxnbb5uUNSj5XnuKyyb3mCKF7/99n1rMwvoEmY="; # Replace with the correct hash
+          sha256 = "sha256-MGqUnfjurMzH8w+vCZLDMUtyj1BDoNWukR1pmmP+iFE="; # Replace with the correct hash
         };
       in
       {
@@ -35,7 +35,7 @@
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${vimTerraform}"
-            export PROJECT_NVIM_CONFIG=${terraformNvimConfig}/terraform-nvim-config.lua
+            export PROJECT_NVIM_CONFIG=${terraformNvimConfig}
           '';
         };
       });
