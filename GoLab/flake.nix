@@ -14,7 +14,7 @@
           owner = "ray-x";
           repo = "go.nvim";
           rev = "master";
-          sha256 = "sha256-2eXvIqPJP76kJwnLtgTLCsti0R0Kzpp1w7ov2xZc2D0=";
+          sha256 = "sha256-M2X3zPdH5Em+BiBo9b+U8icexXgCo5K6WdUsUn8X/yg=";
         };
         guihuaPlugin = pkgs.fetchFromGitHub {
           owner = "ray-x";
@@ -27,13 +27,16 @@
           owner = "mononosis";
           repo = "nvim-go-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-AmQiaRqiQ4+TxO9XY3Ks/TTszqtN1kz0K6zubq0SN30="; # Replace with the correct hash
+          sha256 = "sha256-l72Fi3AMQ9PZqiIzpnDum1EkVdljZYO54gBNMZ5YIkU="; # Replace with the correct hash
         };
       in
       {
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.gccgo13
+            pkgs.gopls
+            pkgs.gofumpt
+            pkgs.golines
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${guihuaPlugin}:${goVimPlugin}"
