@@ -27,10 +27,11 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.nodejs_20
+            pkgs.nodePackages.typescript-language-server
+
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${materialVimColor}:${seoulVimColor}"
-            export PROJECT_NVIM_CONFIG=${luaNeovimLab}
           '';
         };
       });
