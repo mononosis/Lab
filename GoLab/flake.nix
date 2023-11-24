@@ -27,7 +27,7 @@
           owner = "mononosis";
           repo = "nvim-go-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-l72Fi3AMQ9PZqiIzpnDum1EkVdljZYO54gBNMZ5YIkU="; # Replace with the correct hash
+          sha256 = "sha256-Gy8aFfh5DtMt9wAvFCuFrq7mpKHgdCTAJ4oTz+PwobU="; # Replace with the correct hash
         };
       in
       {
@@ -39,6 +39,8 @@
             pkgs.golines
           ];
           shellHook = ''
+            export GOPATH="${pkgs.gccgo13}/bin"
+            export PATH=$PATH:$GOPATH
             export NVIM_PLUGIN_PATHS="${guihuaPlugin}:${goVimPlugin}"
             export PROJECT_NVIM_CONFIG=${goNvimConfig}
           '';
