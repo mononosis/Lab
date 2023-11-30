@@ -49,7 +49,10 @@
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${materialVimColor}:${plenaryPlugin}:${neovdevPlugin}:${seoulVimColor}"
-            export PROJECT_NVIM_CONFIG=${luaNeovimLab}
+            [[ ! -z $NIX_DEV_MODE ]] \
+                && echo "We are in dev mode" \
+                && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${luaNeovimLab.repo} \
+                || export PROJECT_NVIM_CONFIG=${luaNeovimLab}
           '';
         };
       });
