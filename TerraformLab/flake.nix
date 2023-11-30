@@ -32,6 +32,9 @@
             pkgs.terraform-ls
             pkgs.tflint
             pkgs.google-cloud-sdk
+            pkgs.kubectl
+            pkgs.awscli2
+            pkgs.kubernetes-helm
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${vimTerraform}"
