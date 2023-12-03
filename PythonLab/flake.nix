@@ -21,6 +21,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             #pkgs.conda
+            pkgs.hello
             pkgs.python311
             pkgs.nodePackages.pyright
             pkgs.python311Packages.black
