@@ -2,7 +2,7 @@
   description = "Python and its ecosystem projects";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -14,18 +14,30 @@
           owner = "mononosis";
           repo = "nvim-python-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-UF6yCKSBZ3NDDB+q8kYHSljO+3HeE78Stz8ukHTrjsA="; # Replace with the correct hash
+          sha256 = "sha256-DypgPqX3wXaDlAX5bK9E6kYdP/G5WaMQOiOglskmxUA="; # Replace with the correct hash
         };
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = [
+          buildInputs = with pkgs; [
             #pkgs.conda
-            pkgs.hello
-            pkgs.python311
-            pkgs.nodePackages.pyright
-            pkgs.python311Packages.black
-            pkgs.python311Packages.flake8
+            hello
+            python311
+            nodePackages.pyright
+            python311Packages.black
+            python311Packages.flake8
+            python311Packages.setuptools
+            python311Packages.wheel
+            python311Packages.dbus-python
+            python311Packages.pygobject3
+            python311Packages.pygobject-stubs
+            python311Packages.transformers
+            python311Packages.pytorch
+            python311Packages.tensorboard
+            python311Packages.pip
+            python311Packages.matplotlib
+            python311Packages.torchvision
+
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS=""

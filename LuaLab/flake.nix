@@ -26,20 +26,20 @@
           owner = "nvim-lua";
           repo = "plenary.nvim";
           rev = "master";
-          sha256 = "sha256-WBrhQ/sRSnxuY16vxnwASMkXPlWvNFPa6iitsvh2e3A=";
+          sha256 = "sha256-f8YVaXMG0ZyW6iotAgnftaYULnL69UPolRad6RTG27g=";
         };
         neovdevPlugin = pkgs.fetchFromGitHub {
           owner = "folke";
           repo = "neodev.nvim";
           rev = "main";
-          sha256 = "sha256-WBrhQ/sRSnxuY16vxnwASMkXPlWvNFPa6iitsvh2e3A=";
+          sha256 = "sha256-7OdEbwP4ybR59AH8qauRn+3vB48gx9++X+1cYf+0Y8c=";
         };
         # Fetch the Lua configuration file directly from GitHub
         luaNeovimLab = pkgs.fetchFromGitHub {
           owner = "mononosis";
           repo = "nvim-lua-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-E3EHFIRN5zBMDbqCB+sY5qyA6Xw0RYsYGVBJjtF6CtA="; # Replace with the correct hash
+          sha256 = "sha256-/wBqVEuUnTV0YVbef0JCj4nAmTrTbUHdT2CGPoV1liU="; # Replace with the correct hash
         };
       in
       {
