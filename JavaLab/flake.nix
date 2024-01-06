@@ -21,6 +21,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.openjdk11-bootstrap
+            #pkgs.openjdk8-bootstrap
           ];
         };
       });

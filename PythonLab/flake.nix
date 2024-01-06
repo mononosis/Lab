@@ -14,7 +14,7 @@
           owner = "mononosis";
           repo = "nvim-python-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-DypgPqX3wXaDlAX5bK9E6kYdP/G5WaMQOiOglskmxUA="; # Replace with the correct hash
+          sha256 = "sha256-I9HvQAzDR0SfeihK0Dwpz4pjNS7UVsI+5WLHDut/0K0="; # Replace with the correct hash
         };
       in
       {
@@ -26,6 +26,10 @@
             nodePackages.pyright
             python311Packages.black
             python311Packages.flake8
+            python311Packages.pandas
+            python311Packages.mplfinance
+            python311Packages.seaborn
+            python311Packages.plotly
             python311Packages.setuptools
             python311Packages.wheel
             python311Packages.dbus-python
