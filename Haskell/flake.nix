@@ -14,8 +14,6 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = [
-            
-            pkgs.haskell.compiler.ghc981
           ];
         };
       });

@@ -23,14 +23,14 @@
             wrapGAppsHook
           ];
           buildInputs = with pkgs; [
-            helm
+            kubernetes-helm
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS=""
             [[ ! -z $NIX_DEV_MODE ]] \
                 && echo "We are in dev mode" \
-                && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${pythonNeovimLab.repo} \
-                || export PROJECT_NVIM_CONFIG=${pythonNeovimLab}
+                && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${neovimLab.repo} \
+                || export PROJECT_NVIM_CONFIG=${neovimLab}
 
           '';
         };

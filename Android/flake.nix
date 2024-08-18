@@ -15,6 +15,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.scrcpy
+            pkgs.libarchive
           ];
         };
       });

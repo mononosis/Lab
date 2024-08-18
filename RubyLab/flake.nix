@@ -11,17 +11,21 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         nvimProjectLab = pkgs.fetchFromGitHub {
-          name = "nvim-groovy-config";
+          name = "nvim-ruby-config";
           owner = "mononosis";
-          repo = "nvim-groovy-config";
+          repo = "nvim-ruby-config";
           rev = "main"; 
-          sha256 = "sha256-XtrlLOvSP8Kt6JblA1JaV6ngDd8l1vwKWC55ESHu0FM="; 
+          sha256 = "sha256-UXsXx420lMcRT39ggPMUs6vkSzRFgbVNxu54eZQrWmA="; 
         };
       in
       {
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.bundler
+            pkgs.ruby
+
+            pkgs.rubyPackages.solargraph
+            pkgs.rubyPackages.rubocop
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS=""

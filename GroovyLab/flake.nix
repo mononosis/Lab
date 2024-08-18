@@ -15,16 +15,18 @@
           owner = "mononosis";
           repo = "nvim-groovy-config";
           rev = "main"; 
-          sha256 = ""; 
+          sha256 = "sha256-XtrlLOvSP8Kt6JblA1JaV6ngDd8l1vwKWC55ESHu0FM="; 
         };
       in
       {
         devShell = pkgs.mkShell {
           buildInputs = [
-            pkgs.lua-language-server
+            pkgs.openjdk8-bootstrap
+            pkgs.maven
+            pkgs.groovy
           ];
           shellHook = ''
-            export NVIM_PLUGIN_PATHS="${neovdevPlugin}"
+            export NVIM_PLUGIN_PATHS=""
             [[ ! -z $NIX_DEV_MODE ]] \
                 && echo "We are in dev mode" \
                 && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${nvimProjectLab.repo} \

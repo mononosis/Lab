@@ -6,34 +6,30 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        neovdevPlugin = pkgs.fetchFromGitHub {
-          owner = "folke";
-          repo = "neodev.nvim";
-          rev = "main";
-          sha256 = "sha256-7OdEbwP4ybR59AH8qauRn+3vB48gx9++X+1cYf+0Y8c=";
-        };
         nvimProjectLab = pkgs.fetchFromGitHub {
           name = "nvim-lua-config";
           owner = "mononosis";
           repo = "nvim-lua-config";
-          rev = "main"; 
-          sha256 = "sha256-8tQaFkTtrc/yRKbx1GctEHt5Aie0oS72T4EZODS46qE="; 
+          rev = "main";
+          sha256 = "sha256-8tQaFkTtrc/yRKbx1GctEHt5Aie0oS72T4EZODS46qE=";
         };
       in
       {
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.lua-language-server
+            pkgs.lua54Packages.lua
           ];
           shellHook = ''
-            export NVIM_PLUGIN_PATHS="${neovdevPlugin}"
+            export NVIM_PLUGIN_PATHS=""
             [[ ! -z $NIX_DEV_MODE ]] \
                 && echo "We are in dev mode" \
                 && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${nvimProjectLab.repo} \
+                && export XDG_CONFIG_HOME=/home/nixos/.config/home-manager \
                 || export PROJECT_NVIM_CONFIG=${nvimProjectLab}
           '';
         };

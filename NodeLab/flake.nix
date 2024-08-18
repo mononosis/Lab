@@ -10,17 +10,12 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        materialVimColor = pkgs.fetchFromGitHub {
-          owner = "Rigellute";
-          repo = "shades-of-purple.vim";
-          rev = "master";
-          sha256 = "sha256-iiGASgVlIXnnUNBlp9viKgDBfHiOP5P/yJx9XyELT9g=";
-        };
-        jsPlusNeovimLab = pkgs.fetchFromGitHub {
+        nvimProjectLab = pkgs.fetchFromGitHub {
+          name = "nvim-groovy-config";
           owner = "mononosis";
-          repo = "nvim-jsplus-config";
-          rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-HDMxWQgGhT4k975ysoDQmM9Ye4Aoy08x12j9AQnvhqo="; # Replace with the correct hash
+          repo = "nvim-groovy-config";
+          rev = "main"; 
+          sha256 = "sha256-XtrlLOvSP8Kt6JblA1JaV6ngDd8l1vwKWC55ESHu0FM="; 
         };
       in
       {
@@ -34,9 +29,13 @@
             pkgs.openssl
           ];
           shellHook = ''
-            export NODE_OPTIONS=--openssl-legacy-provider
-            export NVIM_PLUGIN_PATHS="${materialVimColor}"
-            export PROJECT_NVIM_CONFIG=${jsPlusNeovimLab}
+            npm set prefix ~/.npm-global
+            export PATH=$PATH:~/.npm-global/bin
+            export NVIM_PLUGIN_PATHS=""
+            [[ ! -z $NIX_DEV_MODE ]] \
+                && echo "We are in dev mode" \
+                && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${nvimProjectLab.repo} \
+                || export PROJECT_NVIM_CONFIG=${nvimProjectLab}
           '';
         };
       });

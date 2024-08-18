@@ -16,11 +16,11 @@
           rev = "master";
           sha256 = "sha256-iiGASgVlIXnnUNBlp9viKgDBfHiOP5P/yJx9XyELT9g=";
         };
-        jsPlusNeovimLab = pkgs.fetchFromGitHub {
+        neovimLab = pkgs.fetchFromGitHub {
           owner = "mononosis";
           repo = "nvim-jsplus-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-HDMxWQgGhT4k975ysoDQmM9Ye4Aoy08x12j9AQnvhqo="; # Replace with the correct hash
+          sha256 = "sha256-cW5tcVrTcXWHT5BGBKOp2SiXETR4fmokjZ6r+SLxVOQ="; # Replace with the correct hash
         };
       in
       {
@@ -28,6 +28,7 @@
           buildInputs = [
             pkgs.nodejs_18
             pkgs.nodePackages.typescript-language-server
+            pkgs.nodePackages.vscode-html-languageserver-bin
             pkgs.nodePackages.typescript
             pkgs.nodePackages.pnpm
             pkgs.yarn
@@ -36,7 +37,10 @@
           shellHook = ''
             export NODE_OPTIONS=--openssl-legacy-provider
             export NVIM_PLUGIN_PATHS="${materialVimColor}"
-            export PROJECT_NVIM_CONFIG=${jsPlusNeovimLab}
+            [[ ! -z $NIX_DEV_MODE ]] \
+                && echo "We are in dev mode" \
+                && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${neovimLab.repo} \
+                || export PROJECT_NVIM_CONFIG=${neovimLab}
           '';
         };
       });

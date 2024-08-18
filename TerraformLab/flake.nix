@@ -22,19 +22,29 @@
           owner = "mononosis";
           repo = "nvim-terraform-config";
           rev = "main"; # Use the appropriate commit or tag
-          sha256 = "sha256-MGqUnfjurMzH8w+vCZLDMUtyj1BDoNWukR1pmmP+iFE="; # Replace with the correct hash
+          sha256 = "sha256-l2UQL/s4jXpfi5Hb7gMzIe+QrT6/lu71yuc0A05l9uE="; # Replace with the correct hash
         };
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = [
-            pkgs.terraform
-            pkgs.terraform-ls
-            pkgs.tflint
-            pkgs.google-cloud-sdk
-            pkgs.kubectl
-            pkgs.awscli2
-            pkgs.kubernetes-helm
+          buildInputs = with pkgs; [
+            terraform
+            postgresql
+            terraform-ls
+            tflint
+            velero
+            vault
+            sops
+            eksctl
+            gnupg
+            k9s
+            kustomize
+            fluxcd
+            graphviz
+            google-cloud-sdk
+            kubectl
+            awscli2
+            kubernetes-helm
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${vimTerraform}"
