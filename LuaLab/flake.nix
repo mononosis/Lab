@@ -15,7 +15,7 @@
           owner = "mononosis";
           repo = "nvim-lua-config";
           rev = "main";
-          sha256 = "sha256-8tQaFkTtrc/yRKbx1GctEHt5Aie0oS72T4EZODS46qE=";
+          sha256 = "sha256-DsWKyMYYkOSc3jnfiBrECmV/Addlxrt1PX22xGsHHZY=";
         };
       in
       {
