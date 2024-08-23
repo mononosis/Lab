@@ -42,6 +42,7 @@
             pkgs.nodejs_18
             #pkgs.vscode-langservers-extracted
             pkgs.nodePackages.typescript
+            pkgs.yo
             pkgs.nodePackages.typescript-language-server
             pkgs.yarn
             #pkgs.nodePackages.vscode-html-languageserver-bin
