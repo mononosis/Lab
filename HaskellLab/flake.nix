@@ -1,20 +1,37 @@
 {
-  description = "Lua projects";
+  description = "Haskell projects";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        nvimHaskellLab = pkgs.fetchFromGitHub {
+          name = "nvim-haskell-config";
+          owner = "mononosis";
+          repo = "nvim-haskell-config";
+          rev = "main";
+          sha256 = "sha256-dC6YS3gNcwECZ7/+GKts5asb9zK/4bfXxRJ5lGf66xQ=";
+        };
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = [
+          buildInputs = with pkgs;[
+            #haskell-language-server
+            haskellPackages.haskell-language-server
           ];
+          shellHook = ''
+            export NVIM_PLUGIN_PATHS=""
+            [[ ! -z $NIX_DEV_MODE ]] \
+                && echo "We are in dev mode ${nvimHaskellLab.repo}" \
+                && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${nvimHaskellLab.repo} \
+                && export XDG_CONFIG_HOME=/home/nixos/.config/home-manager \
+                || export PROJECT_NVIM_CONFIG=${nvimHaskellLab}
+          '';
         };
       });
 }
