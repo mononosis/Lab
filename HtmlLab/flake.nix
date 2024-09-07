@@ -42,18 +42,20 @@
             pkgs.nodejs_18
             #pkgs.vscode-langservers-extracted
             pkgs.nodePackages.typescript
-            pkgs.yo
             pkgs.nodePackages.typescript-language-server
             pkgs.yarn
+            pkgs.yo
             #pkgs.nodePackages.vscode-html-languageserver-bin
             pkgs.nodePackages.browser-sync
             pkgs.hurl
+            pkgs.nodePackages.webpack
             pkgs.nodePackages.pnpm
             pkgs.htmlhint
             pkgs.caddy
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS="${pluginTSAutotag}:${pluginWebTools}"
+            export PATH=$PATH:~/.npm-global/bin
             [[ ! -z $NIX_DEV_MODE ]] \
                 && echo "We are in dev mode" \
                 && export PROJECT_NVIM_CONFIG=$HOME/Lab/LuaLab/${nvimHtmlLab.repo} \

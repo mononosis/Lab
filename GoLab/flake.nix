@@ -51,7 +51,8 @@
         };
         devShell = pkgs.mkShell {
           buildInputs = [
-            pkgs.gccgo13
+            #pkgs.gccgo13
+            pkgs.go_1_18
             pkgs.gopls
             pkgs.gofumpt
             pkgs.golines

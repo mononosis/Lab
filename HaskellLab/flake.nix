@@ -2,7 +2,7 @@
   description = "Haskell projects";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -22,7 +22,16 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs;[
             #haskell-language-server
-            haskellPackages.haskell-language-server
+            haskell.compiler.ghc964
+            zlib
+            (
+              haskell-language-server.override { supportedGhcVersions = [ "964" "94" ]; }
+            )
+
+            #haskellPackages.haskell-language-server
+            haskellPackages.stack
+            ormolu
+
           ];
           shellHook = ''
             export NVIM_PLUGIN_PATHS=""
